@@ -2,7 +2,7 @@
 
 This repository provides datasets and code for preprocessing, training and testing models for the paper:
 
-> [Diverse Text Generation via Variational Encoder-Decoder Models with Gaussian Process Priors]() <br>
+> [Diverse Text Generation via Variational Encoder-Decoder Models with Gaussian Process Priors](http://arxiv.org/abs/2204.01227) <br>
 > Wanyu Du, Jianqiao Zhao, Liwei Wang and Yangfeng Ji <br>
 > [ACL 2022 6th Workshop on Structured Prediction for NLP](http://structuredprediction.github.io/SPNLP22) <br>
 
