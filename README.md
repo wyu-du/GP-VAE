@@ -25,14 +25,8 @@ The project was tested using Python 3.6.6.
 source_sentence \t reference_sentence 
 ```
 
-2. **GYAFC** has two sub-domains `em` and `fr`, and each sub-domain includes `trn/val/tst.tsv`, which has the following format in each line:
-```
-source_sentence \t reference_sentence 
-```
-For final evaluation, use `tst_all.tsv`, which has the following format in each line:
-```
-source_sentence \t reference1 \t reference2 \t reference3 \t reference4
-```
+2. **GYAFC** has two sub-domains `em` and `fr`, please request and download the data from the original paper [here](https://github.com/raosudha89/GYAFC-corpushttps://github.com/raosudha89/GYAFC-corpus).
+
 
 ## Models
 
@@ -40,7 +34,7 @@ source_sentence \t reference1 \t reference2 \t reference3 \t reference4
 Train the LSTM-based variational encoder-decoder with GP priors:
 ```
 cd models/pg/
-python main.py --task train --data_file ../../data/GYAFC/em \
+python main.py --task train --data_file ../../data/twitter_url \
 			   --model_type gp_full --kernel_v 65.0 --kernel_r 0.0001
 ```
 where `--data_file` indicates the data path for the training data, <br>
@@ -51,8 +45,8 @@ where `--data_file` indicates the data path for the training data, <br>
 Train the transformer-based variational encoder-decoder with GP priors:
 ```
 cd models/t5/
-python t5_gpvae.py --task train --dataset GYAFC/em \
-    			   --kernel_v 128.0 --kernel_r 10.0 
+python t5_gpvae.py --task train --dataset twitter_url \
+    			   --kernel_v 512.0 --kernel_r 0.001 
 ```
 where `--data_file` indicates the data path for the training data, <br>
 `--kernel_v` and `--kernel_r` specifies the hyper-parameters for the kernel of GP prior.
@@ -63,7 +57,7 @@ where `--data_file` indicates the data path for the training data, <br>
 Test the LSTM-based variational encoder-decoder with GP priors:
 ```
 cd models/pg/
-python main.py --task decode --data_file ../../data/GYAFC/em \
+python main.py --task decode --data_file ../../data/twitter_url \
 			   --model_type gp_full --kernel_v 65.0 --kernel_r 0.0001 \
 			   --decode_from sample \
 			   --model_file /path/to/best/checkpoint
@@ -78,8 +72,8 @@ where `--data_file` indicates the data path for the testing data, <br>
 Test the transformer-based variational encoder-decoder with GP priors:
 ```
 cd models/t5/
-python t5_gpvae.py --task eval --dataset GYAFC/em \
-    			   --kernel_v 128.0 --kernel_r 10.0 \
+python t5_gpvae.py --task eval --dataset twitter_url \
+    			   --kernel_v 512.0 --kernel_r 0.001 \
     			   --from_mean \
     			   --timestamp '2021-02-14-04-57-04' \
     			   --ckpt '30000' # load best checkpoint
