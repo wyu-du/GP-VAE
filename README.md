@@ -90,11 +90,11 @@ If you find this work useful for your research, please cite our paper:
 
 #### Diverse Text Generation via Variational Encoder-Decoder Models with Gaussian Process Priors
 ```
-@inproceedings{du2022gpvae,
-    title = "Diverse Text Generation via Variational Encoder-Decoder Models with Gaussian Process Priors",
-    author = "Du, Wanyu and Zhao, Jianqiao and Wang, Liwei and Ji, Yangfeng",
-    booktitle = "Proceedings of the 6th Workshop on Structured Prediction for NLP (SPNLP 2022)",
-    year = "2022",
-    publisher = "Association for Computational Linguistics",
+@article{du2022diverse,
+  title={Diverse Text Generation via Variational Encoder-Decoder Models with Gaussian Process Priors},
+  author={Du, Wanyu and Zhao, Jianqiao and Wang, Liwei and Ji, Yangfeng},
+  journal={arXiv preprint arXiv:2204.01227},
+  year={2022},
+  url={https://arxiv.org/abs/2204.01227}
 }
 ```
