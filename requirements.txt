@@ -1,4 +1,4 @@
-pytorch==1.2.0
+pytorch==1.5.0
 torchvision==0.4.0
 cudatoolkit==10.0
 tensorboard==1.14
@@ -6,6 +6,7 @@ tensorflow==1.14
 torchtext==0.4.0
 nltk
 spacy
-transformers
+transformers==4.14.1
 datasets
 sentencepiece
+pandas
