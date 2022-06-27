@@ -7,7 +7,7 @@ import random
 import torch
 from torch.autograd import Variable
 from heapq import nlargest
-from copynet.utils import get_decode_input_from_batch
+from utils import get_decode_input_from_batch
 
 class Beam(object):
     def __init__(self, tokens, log_probs, state, context, coverage):
