@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 from torch.autograd import Variable
-from copynet.utils import get_input_from_batch, get_output_from_batch, log_Normal_diag
+from utils import get_input_from_batch, get_output_from_batch, log_Normal_diag
 
 #torch.manual_seed(123)
 #if torch.cuda.is_available():
@@ -167,7 +167,9 @@ class Copynet(nn.Module):
         scores = self.v(e) # BL x 1
         scores = scores.view(-1, l) # B x L
         
-        attn_dist_ = F.softmax(scores, dim=1) * enc_padding_mask # B x L
+
+        attn_dist_ = F.softmax(scores, dim=1) 
+        attn_dist_=attn_dist_* (enc_padding_mask.float()) # B x L
         attn_dist = attn_dist_.unsqueeze(1)  # B x 1 x L
         
         c_t = torch.bmm(attn_dist, enc_outputs) # B x 1 x 2H
@@ -272,6 +274,7 @@ class Normal(Copynet):
             coverage = next_coverage
             nll_list.append(step_nll)
         batch_nll = torch.stack(nll_list, 1) # B x T
+        dec_padding_mask=dec_padding_mask.float()
         nll = torch.sum(batch_nll * dec_padding_mask, dim=1)  # B
         nll = nll / dec_padding_mask.sum(dim=1)
         nll = torch.mean(nll)
@@ -533,6 +536,7 @@ class GP_Full(Copynet):
             coverage = next_coverage
             nll_list.append(step_nll)
         batch_nll = torch.stack(nll_list, 1) # B x T
+        dec_padding_mask=dec_padding_mask.float()
         nll = torch.sum(batch_nll * dec_padding_mask, dim=1)  # B
         nll = nll / dec_padding_mask.sum(dim=1)
         nll = torch.mean(nll)
