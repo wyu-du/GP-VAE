@@ -9,7 +9,7 @@ absl.logging._warn_preinit_stderr = False
 import torch
 from torch import autograd
 from torch.nn.utils import clip_grad_norm_ as clip_grad_norm
-from copynet.utils import kl_anneal_weight
+from utils import kl_anneal_weight
 
 
 
