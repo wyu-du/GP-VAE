@@ -108,8 +108,8 @@ class Seq2SeqModel(T5ForConditionalGeneration):
             trace_batch = torch.matmul(p_var_inv, q_var)  # B x L x L
             trace_list = [torch.trace(trace_batch[i]) for i in range(trace_batch.size(0))]
             trace = torch.stack(trace_list, dim=0)  # B
-
-            mean_diff = p_mean.unsqueeze(2) - q_mean.unsqueeze(2)  # B x L x 1
+            mean_diff = p_mean - q_mean.unsqueeze(2)  # B x L x 1
+           
             mean = torch.matmul(torch.matmul(mean_diff.transpose(1, 2), p_var_inv), mean_diff)  # B x K x K
 
             kld = log_det - k + trace + torch.mean(mean, dim=(1,2))
